@@ -410,7 +410,7 @@
               alt="Capibara toggle sdadsd"
               class="w-24 h-24 cursor-pointer hover:scale-110 transition duration-300"
             />
-            <audio id="bg-music" src="/La canción de Capibara que conquistó al mundo entero!.mp3" ></audio>
+            <audio id="bg-music" src="./Musica/La canción de Capibara que conquistó al mundo entero!.mp3" ></audio>
           </div>
     <!-- New Navigation Menu -->
     <nav class="nav-menu">
@@ -442,7 +442,7 @@
           <!-- Changed from placeholder to actual user image URL -->
           <img
             id="profile-image"
-            src="/Imagenes/WhatsApp Image 2025-07-07 at 13.07.24.jpeg"
+            src="./Imagenes/WhatsApp Image 2025-07-07 at 13.07.24.jpeg"
             alt="Gissel"
             class="w-64 h-64 rounded-full object-cover mb-4 border-4 border-pink-300 shadow-lg"
           />
@@ -466,13 +466,13 @@
     <!-- Carrusel automático -->
     <div class="overflow-hidden relative w-full max-w-2xl mx-auto rounded-xl shadow-lg">
       <div id="carousel-images" class="flex transition-transform duration-700 ease-in-out">
-        <img src="/Imagenes/gissel 1.jpeg" class="w-full flex-shrink-0" alt="Imagen 1" />
-        <img src="/Imagenes/gissel 2.jpeg" class="w-full flex-shrink-0" alt="Imagen 2" />
-        <img src="/Imagenes/gissel 3.jpeg" class="w-full flex-shrink-0" alt="Imagen 3" />
-        <img src="/Imagenes/gissel 4.jpeg" class="w-full flex-shrink-0" alt="Imagen 4" />
-        <img src="/Imagenes/gissel 5.jpeg" class="w-full flex-shrink-0" alt="Imagen 5" />
-        <img src="/Imagenes/gissel 6.jpeg" class="w-full flex-shrink-0" alt="Imagen 6" />
-        <img src="/Imagenes/gissel 7.jpeg" class="w-full flex-shrink-0" alt="Imagen 7" />
+        <img src="./Imagenes/gissel 1.jpeg" class="w-full flex-shrink-0" alt="Imagen 1" />
+        <img src="./Imagenes/gissel 2.jpeg" class="w-full flex-shrink-0" alt="Imagen 2" />
+        <img src="./Imagenes/gissel 3.jpeg" class="w-full flex-shrink-0" alt="Imagen 3" />
+        <img src="./Imagenes/gissel 4.jpeg" class="w-full flex-shrink-0" alt="Imagen 4" />
+        <img src="./Imagenes/gissel 5.jpeg" class="w-full flex-shrink-0" alt="Imagen 5" />
+        <img src="./Imagenes/gissel 6.jpeg" class="w-full flex-shrink-0" alt="Imagen 6" />
+        <img src="./Imagenes/gissel 7.jpeg" class="w-full flex-shrink-0" alt="Imagen 7" />
       </div>
     </div>
   </div>
@@ -516,12 +516,7 @@
             </div>
           </div>
 
-            <!-- Updated capybara image URL in #detalles section -->
-            <img
-              src="https://cdn.pixabay.com/photo/2022/09/24/16/33/capybara-7476423_1280.png"
-              alt="Capybara detalles"
-              class="absolute w-20 top-20 left-10 transform -rotate-12 animate-pulse hidden md:block"
-            />
+           
           </div>
         </div>
       </section>
@@ -593,19 +588,19 @@
 
             <!-- Additional Capybaras -->
             <img
-              src="/Imagenes/images-2.png"
+              src="./Imagenes/images-2.png"
               alt="Capybara 1"
               class="absolute  md:w-32 -top-10 -left-4 transform rotate-12 animate-float"
             />
             <img
-              src="/Imagenes/images-3.png"
+              src="./Imagenes/images-3.png"
               alt="Capybara 2"
               class="absolute  md:w-32 -bottom-10 -right-2 transform -rotate-12 animate-bounce"
             />
           
            
             <img
-              src="/Imagenes/images-1.png"
+              src="./Imagenes/images-1.png"
               alt="Capybara 4"
               class="absolute w-80 md:w-20 top-5 -right-8 transform rotate-3 animate-float"
             />
@@ -843,16 +838,16 @@ document.addEventListener("DOMContentLoaded", () => {
   capybara.addEventListener("click", () => {
     if (audio.paused) {
       audio.play();
-      capybara.src = "/Imagenes/Capibara-Play.png";
+      capybara.src = "./Imagenes/Capibara-Play.png";
     } else {
       audio.pause();
-      capybara.src = "/Imagenes/Capibara-Play.png";
+      capybara.src = "./Imagenes/Capibara-Play.png";
     }
   });
 
   // Pre-cargar imagen de pausa
   const preload = new Image();
-  preload.src = "/Imagenes/Capibara-Play.png";
+  preload.src = "./Imagenes/Capibara-Play.png";
 });
 
 // Carrusel automático
