@@ -380,6 +380,10 @@
           width: 75px !important;
         }
 
+        #countdown img.absolute:nth-child(3) {
+          width: 90px !important;
+        }
+
         /* Center profile photo on small screens */
         #inicio .w-32.h-32.rounded-full {
           width: 100px;
@@ -462,10 +466,10 @@
 
       <section class="section-full">
   <div class="container mx-auto px-4">
-    <h2 class="titulo2 text-3xl font-bold text-center text-pink-700 ">Mis 10 años</h2>
+    <h2 class="titulo2 text-5xl font-bold text-center text-pink-700 mb-4 ">Mis 10 años</h2>
 
     <!-- Carrusel automático -->
-    <div class="overflow-hidden relative w-full max-w-2xl mx-auto rounded-xl shadow-lg md:w-96">
+    <div class="overflow-hidden relative w-4/5 max-w-2xl mx-auto rounded-xl shadow-lg md:w-96">
       <div id="carousel-images" class="flex transition-transform duration-700 ease-in-out">
         <img src="./Imagenes/gissel 1.jpeg" class="w-full flex-shrink-0" alt="Imagen 1" />
         <img src="./Imagenes/gissel 2.jpeg" class="w-full flex-shrink-0" alt="Imagen 2" />
@@ -503,17 +507,27 @@
             <div>
               
               <!-- Mapa de Google Maps -->
-              <div class="w-full h-64 rounded-lg overflow-hidden shadow-lg">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.416595325311!2d-58.41188342341291!3d-34.62055335886595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb7e0f7131c1%3A0x7d64777dc6f458f9!2sAv.%20Corrientes%202671%2C%20C1183AAE%20CABA!5e0!3m2!1ses-419!2sar!4v1720365781492!5m2!1ses-419!2sar"
-                  width="100%"
-                  height="100%"
-                  style="border:0;"
-                  allowfullscreen=""
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
+             <div class="relative w-full h-64 rounded-lg overflow-hidden shadow-lg">
+  <!-- Enlace a Google Maps (con navegación) -->
+  <a
+    href="https://www.google.com/maps/dir/?api=1&destination=San+Martín+280,+San+Pedro+de+Jujuy,+Jujuy,+Argentina"
+    target="_blank"
+    class="absolute inset-0 z-10"
+    aria-label="Cómo llegar"
+  ></a>
+
+  <!-- Mapa embebido (solo vista) -->
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3638.1063292275157!2d-64.87063932389414!3d-24.238059586802823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x941a5867a8f3d823%3A0x2d546223454490bc!2sSan%20Mart%C3%ADn%20280%2C%20Y4502ADF%20San%20Pedro%20de%20Jujuy%2C%20Jujuy!5e0!3m2!1ses!2sar!4v1751916821878!5m2!1ses!2sar"
+    width="100%"
+    height="100%"
+    style="border:0;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>
+
             </div>
           </div>
 
@@ -603,7 +617,7 @@
             <img
               src="./Imagenes/images-1.png"
               alt="Capybara 4"
-              class="absolute w-80 md:w-20 top-5 -right-8 transform rotate-3 animate-float"
+              class="absolute  md:w-20 top-5 -right-8 transform rotate-3 animate-float"
             />
           </div>
         </div>
