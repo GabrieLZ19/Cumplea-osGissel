@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>¡Feliz Cumpleaños, Gissel!</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Bubblegum+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style id="app-style">
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: #f8f9fa;
+        background-image: url("https://cdn.pixabay.com/photo/2023/05/21/07/50/capybara-8007970_1280.png"),
+          url("https://cdn.pixabay.com/photo/2013/07/12/16/33/confetti-151817_1280.png");
+        background-repeat: no-repeat, repeat;
+        background-position: bottom right, center;
+        background-size: 150px, 500px;
+        background-attachment: fixed, scroll;
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden; /* Prevent body scroll */
+      }
+
+      /* New styles for scroll snap and full-screen sections */
+      .scroll-container {
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+        height: 100vh;
+        scroll-behavior: smooth;
+      }
+
+      .section-full {
+        height: 100vh;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        transform: translateY(20px);
+      }
+
+      .section-full.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Navigation styles */
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        backdrop-filter: blur(8px);
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 0;
+      }
+
+      .nav-menu ul {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+      }
+
+      .nav-menu a {
+        color: #333;
+        font-weight: 700;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu a:hover,
+      .nav-menu a.active {
+        background-color: #f8c8dc;
+      }
+
+      /* Animation keyframes */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 1s ease-out forwards;
+      }
+
+      .slide-in {
+        animation: slideIn 1s ease-out forwards;
+      }
+
+      .confetti {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      h1 {
+        font-family: "Bubblegum Sans", cursive;
+        color: #333;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .titulo2 {
+        font-family: "Pacifico", cursive;
+        color: #f06292;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        background: linear-gradient(135deg, #f8c8dc 0%, #c8e7f8 100%);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .card {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .details {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .youtube-container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .youtube-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+      }
+
+      .video-controls {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background-color: #f8c8dc;
+        color: #333;
+        border: none;
+        border-radius: 30px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .video-controls:hover {
+        background-color: #c8e7f8;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .balloon {
+        position: absolute;
+        width: 40px;
+        height: 50px;
+        background-color: #f8c8dc;
+        border-radius: 50%;
+        animation: float 15s infinite ease-in-out;
+        opacity: 0.7;
+      }
+
+      .balloon:before {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 20px;
+        background-color: #f8c8dc;
+        bottom: -15px;
+        left: 15px;
+        border-radius: 0 0 5px 5px;
+      }
+
+      .balloon.blue {
+        background-color: #c8e7f8;
+      }
+
+      .balloon.blue:before {
+        background-color: #c8e7f8;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1) rotate(6deg);
+        }
+        50% {
+          transform: scale(1.05) rotate(0deg);
+        }
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-20px) rotate(0deg);
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+        }
+      }
+
+      @media (max-width: 640px) {
+        h1 {
+          font-size: 1.75rem;
+        }
+        body {
+          background-size: 100px, 300px;
+        }
+      }
+
+      /* Updated countdown styling */
+      .countdown-unit {
+        opacity: 0;
+        animation: fadeIn 0.8s forwards;
+        animation-delay: calc(var(--order) * 0.2s);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Animation for number changes */
+      .number-changing {
+        animation: numberPulse 0.5s;
+      }
+
+      @keyframes numberPulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Responsive layout for countdown */
+      @media (max-width: 640px) {
+        #countdown-timer {
+          flex-wrap: wrap;
+          gap: 15px;
+        }
+        .countdown-unit {
+          width: 40%;
+        }
+      }
+
+      /* Mobile-specific styles */
+      @media (max-width: 480px) {
+        .countdown-unit {
+          width: 45% !important;
+          margin-bottom: 10px;
+        }
+
+        .countdown-unit div {
+          font-size: 2rem !important;
+        }
+
+        /* Hide non-essential elements */
+        .balloon,
+        .nav-menu,
+        body::before,
+        body::after {
+          display: none !important;
+        }
+
+        /* Center countdown vertically */
+        #countdown {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          padding: 1rem 0;
+        }
+
+        /* Reduce padding */
+        .card {
+          padding: 0.5rem !important;
+        }
+
+        #countdown-timer {
+          padding: 0.5rem 0 !important;
+        }
+
+        /* Simplify background */
+        body {
+          background-image: none;
+          background-color: #f8f9fa;
+        }
+      }
+
+      /* Additional responsive styles for new capybara images */
+      @media (max-width: 640px) {
+        #inicio img.absolute,
+        #detalles img.absolute {
+          width: 60px !important;
+        }
+
+        #countdown img.absolute {
+          width: 75px !important;
+        }
+
+        /* Center profile photo on small screens */
+        #inicio .w-32.h-32.rounded-full {
+          width: 100px;
+          height: 100px;
+        }
+      }
+
+      /* Hide some capybaras on very small screens */
+      /* @media (max-width: 480px) {
+        #detalles img.absolute,
+        #countdown img.absolute:nth-child(4) {
+          display: none !important;
+        } */
+      
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <div id="intro-screen" class="fixed inset-0 flex items-center justify-center bg-white z-50">
+  <button id="enter-btn" class="px-6 py-3 bg-pink-400 text-white font-bold rounded-full shadow-lg text-lg">
+    Entrar a la fiesta 🎉
+  </button>
+</div>
+
+    <div id="audio-controller" class="fixed bottom-4 right-4 z-50" style="display: none;">
+            <img
+              id="capybara-toggle"
+              src="/Imagenes/Capibara-Play.png"
+              alt="Capibara toggle sdadsd"
+              class="w-24 h-24 cursor-pointer hover:scale-110 transition duration-300"
+            />
+            <audio id="bg-music" src="/La canción de Capibara que conquistó al mundo entero!.mp3" ></audio>
+          </div>
+    <!-- New Navigation Menu -->
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="#inicio" class="active">Inicio</a></li>
+        <li><a href="#detalles">Detalles</a></li>
+        <li><a href="#countdown">Cuenta Regresiva</a></li>
+      </ul>
+    </nav>
+
+    <!-- Confetti Container -->
+    <div class="confetti" id="confetti-container"></div>
+
+    <!-- Balloons -->
+    <div class="balloon" style="top: 10%; left: 10%"></div>
+    <div class="balloon blue" style="top: 15%; left: 85%"></div>
+    <div class="balloon" style="top: 30%; left: 20%"></div>
+    <div class="balloon blue" style="top: 40%; left: 75%"></div>
+    <div class="balloon" style="top: 60%; left: 15%"></div>
+    <div class="balloon blue" style="top: 70%; left: 80%"></div>
+
+    <!-- Main Scroll Container (replacing the main tag) -->
+    <div class="scroll-container" id="main-container">
+      <!-- Section 1: Home - Replacing Gissel's photo with the uploaded image -->
+      <section id="inicio" class="section-full">
+        <div
+          class="container mx-auto px-4 flex flex-col items-center justify-center"
+        >
+          <!-- Changed from placeholder to actual user image URL -->
+          <img
+            id="profile-image"
+            src="/Imagenes/WhatsApp Image 2025-07-07 at 13.07.24.jpeg"
+            alt="Gissel"
+            class="w-64 h-64 rounded-full object-cover mb-4 border-4 border-pink-300 shadow-lg"
+          />
+          <h1 class="text-4xl font-bold text-center mb-10">
+            ¡Feliz Cumpleaños, Gissel!
+          </h1>
+          <div class="text-center text-xl">
+            <p class="mb-5">Bienvenido a la celebración</p>
+            <i class="fas fa-chevron-down text-2xl animate-bounce"></i>
+          </div>
+        
+          
+
+        </div>
+      </section>
+
+      <section class="section-full">
+  <div class="container mx-auto px-4">
+    <h2 class="titulo2 text-3xl font-bold text-center text-pink-700 ">Mis 10 años</h2>
+
+    <!-- Carrusel automático -->
+    <div class="overflow-hidden relative w-full max-w-2xl mx-auto rounded-xl shadow-lg">
+      <div id="carousel-images" class="flex transition-transform duration-700 ease-in-out">
+        <img src="/Imagenes/gissel 1.jpeg" class="w-full flex-shrink-0" alt="Imagen 1" />
+        <img src="/Imagenes/gissel 2.jpeg" class="w-full flex-shrink-0" alt="Imagen 2" />
+        <img src="/Imagenes/gissel 3.jpeg" class="w-full flex-shrink-0" alt="Imagen 3" />
+        <img src="/Imagenes/gissel 4.jpeg" class="w-full flex-shrink-0" alt="Imagen 4" />
+        <img src="/Imagenes/gissel 5.jpeg" class="w-full flex-shrink-0" alt="Imagen 5" />
+        <img src="/Imagenes/gissel 6.jpeg" class="w-full flex-shrink-0" alt="Imagen 6" />
+        <img src="/Imagenes/gissel 7.jpeg" class="w-full flex-shrink-0" alt="Imagen 7" />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+      <!-- Section 2: Event Details - Updating capybara image to color version -->
+      <section id="detalles" class="section-full">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold mb-8 text-center">
+            Detalles del Evento
+          </h2>
+          <div class="card p-6 md:p-8 max-w-2xl mx-auto">
+            <div class="details p-5 mb-4 flex items-center">
+              <i class="fas fa-calendar-alt text-2xl mr-4 text-pink-400"></i>
+              <div>
+                <h3 class="font-bold text-gray-700">Fecha y Hora</h3>
+                <p class="text-gray-600 text-lg">Jueves 24 de julio, 17:00</p>
+              </div>
+            </div>
+            <div class="details p-5 flex flex-col md:flex-row md:items-center">
+            <div class="flex items-center mb-4 md:mb-0 md:mr-4">
+              <i class="fas fa-map-marker-alt text-2xl text-pink-400"></i>
+              <h3 class="font-bold text-gray-700 ml-2">Ubicación</h3>
+              <p class="text-gray-600 text-lg ml-2 ">Salón COSME</p>
+            </div>
+            <div>
+              
+              <!-- Mapa de Google Maps -->
+              <div class="w-full h-64 rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.416595325311!2d-58.41188342341291!3d-34.62055335886595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb7e0f7131c1%3A0x7d64777dc6f458f9!2sAv.%20Corrientes%202671%2C%20C1183AAE%20CABA!5e0!3m2!1ses-419!2sar!4v1720365781492!5m2!1ses-419!2sar"
+                  width="100%"
+                  height="100%"
+                  style="border:0;"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+            <!-- Updated capybara image URL in #detalles section -->
+            <img
+              src="https://cdn.pixabay.com/photo/2022/09/24/16/33/capybara-7476423_1280.png"
+              alt="Capybara detalles"
+              class="absolute w-20 top-20 left-10 transform -rotate-12 animate-pulse hidden md:block"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Countdown Timer - All capybara images are already using the correct URLs -->
+      <section id="countdown" class="section-full">
+        <div class="container mx-auto px-4">
+          <div class="card p-6 md:p-8 max-w-3xl mx-auto relative">
+          <!-- Background Audio Player - Updated for YouTube track -->
+         
+          <div class="card p-6 md:p-8 max-w-3xl mx-auto relative">
+            <!-- Updated Countdown Display -->
+            <div
+              id="countdown-timer"
+              class="flex flex-wrap justify-center items-center gap-4 md:gap-8 py-10"
+            >
+              <div
+                class="countdown-unit bg-white rounded-xl shadow-md p-4 w-32 text-center transform transition-all duration-500 hover:scale-105"
+              >
+                <div
+                  id="days"
+                  class="text-4xl md:text-6xl font-bold text-pink-400 transition-all duration-300"
+                >
+                  00
+                </div>
+                <div class="text-sm md:text-base text-gray-600 mt-1">Días</div>
+              </div>
+
+              <div
+                class="countdown-unit bg-white rounded-xl shadow-md p-4 w-32 text-center transform transition-all duration-500 hover:scale-105"
+              >
+                <div
+                  id="hours"
+                  class="text-4xl md:text-6xl font-bold text-pink-400 transition-all duration-300"
+                >
+                  00
+                </div>
+                <div class="text-sm md:text-base text-gray-600 mt-1">Horas</div>
+              </div>
+
+              <div
+                class="countdown-unit bg-white rounded-xl shadow-md p-4 w-32 text-center transform transition-all duration-500 hover:scale-105"
+              >
+                <div
+                  id="minutes"
+                  class="text-4xl md:text-6xl font-bold text-pink-400 transition-all duration-300"
+                >
+                  00
+                </div>
+                <div class="text-sm md:text-base text-gray-600 mt-1">
+                  Minutos
+                </div>
+              </div>
+
+              <div
+                class="countdown-unit bg-white rounded-xl shadow-md p-4 w-32 text-center transform transition-all duration-500 hover:scale-105"
+              >
+                <div
+                  id="seconds"
+                  class="text-4xl md:text-6xl font-bold text-pink-400 transition-all duration-300"
+                >
+                  00
+                </div>
+                <div class="text-sm md:text-base text-gray-600 mt-1">
+                  Segundos
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional Capybaras -->
+            <img
+              src="/Imagenes/images-2.png"
+              alt="Capybara 1"
+              class="absolute  md:w-32 -top-10 -left-4 transform rotate-12 animate-float"
+            />
+            <img
+              src="/Imagenes/images-3.png"
+              alt="Capybara 2"
+              class="absolute  md:w-32 -bottom-10 -right-2 transform -rotate-12 animate-bounce"
+            />
+          
+           
+            <img
+              src="/Imagenes/images-1.png"
+              alt="Capybara 4"
+              class="absolute w-80 md:w-20 top-5 -right-8 transform rotate-3 animate-float"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <input
+      type="file"
+      id="photo-upload"
+      accept="image/*"
+      style="display: none"
+    />
+
+    <script id="app-script">
+      // Background music setup - Updated for YouTube
+      document.addEventListener("DOMContentLoaded", () => {
+        // Set animation order for countdown units
+        const countdownUnits = document.querySelectorAll(".countdown-unit");
+        countdownUnits.forEach((unit, index) => {
+          unit.style.setProperty("--order", index);
+        });
+
+        // Handle profile image upload or display
+        const profileImage = document.getElementById("profile-image");
+        const photoUpload = document.getElementById("photo-upload");
+
+        // Check if we have a stored image in localStorage
+        const savedImageData = localStorage.getItem("profileImageData");
+        if (savedImageData) {
+          profileImage.src = savedImageData;
+        }
+
+        // Listen for file input changes
+        if (photoUpload) {
+          photoUpload.addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = function (e) {
+                profileImage.src = e.target.result;
+                // Save to localStorage for persistence
+                localStorage.setItem("profileImageData", e.target.result);
+              };
+              reader.readAsDataURL(file);
+            }
+          });
+        }
+
+        // Create light confetti only during countdown
+        createConfetti();
+      });
+
+      // Track previous values to animate changes
+      let prevDays, prevHours, prevMinutes, prevSeconds;
+
+      // Countdown Timer - Moved outside DOMContentLoaded for reliability
+      const countdownDate = new Date("July 24, 2025 18:00:00").getTime(); // Updated year to 2025
+
+      function updateCountdown() {
+        try {
+          const now = new Date().getTime();
+          const distance = countdownDate - now;
+
+          // Calculate days, hours, minutes, seconds
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          // Update HTML elements with animation if values changed
+          const daysElement = document.getElementById("days");
+          const hoursElement = document.getElementById("hours");
+          const minutesElement = document.getElementById("minutes");
+          const secondsElement = document.getElementById("seconds");
+
+          // Added null checks for element existence
+          if (daysElement)
+            updateElementWithAnimation(daysElement, days, prevDays);
+          if (hoursElement)
+            updateElementWithAnimation(hoursElement, hours, prevHours);
+          if (minutesElement)
+            updateElementWithAnimation(minutesElement, minutes, prevMinutes);
+          if (secondsElement)
+            updateElementWithAnimation(secondsElement, seconds, prevSeconds);
+
+          // Store current values for next comparison
+          prevDays = days;
+          prevHours = hours;
+          prevMinutes = minutes;
+          prevSeconds = seconds;
+
+          if (distance < 0) {
+            // Clear interval when countdown ends
+            clearInterval(countdownInterval);
+            // Show celebration message
+            document
+              .querySelectorAll(".countdown-unit div:first-child")
+              .forEach((el) => {
+                el.textContent = "00";
+              });
+          }
+        } catch (error) {
+          console.error("Countdown error:", error);
+        }
+      }
+
+      function updateElementWithAnimation(element, newValue, prevValue) {
+        if (newValue !== prevValue) {
+          element.classList.add("number-changing");
+          setTimeout(() => {
+            element.classList.remove("number-changing");
+          }, 500);
+        }
+        element.textContent = newValue.toString().padStart(2, "0");
+      }
+
+      // Initialize countdown
+      updateCountdown();
+      const countdownInterval = setInterval(updateCountdown, 1000);
+
+      // New IntersectionObserver for scroll animations
+      document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll(".section-full");
+        const navLinks = document.querySelectorAll(".nav-menu a");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+
+                // Update navigation active state
+                const id = entry.target.getAttribute("id");
+                navLinks.forEach((link) => {
+                  if (link.getAttribute("href") === `#${id}`) {
+                    link.classList.add("active");
+                  } else {
+                    link.classList.remove("active");
+                  }
+                });
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+
+        sections.forEach((section) => {
+          observer.observe(section);
+        });
+
+        // Handle navigation clicks
+        navLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute("href");
+            document
+              .querySelector(targetId)
+              .scrollIntoView({ behavior: "smooth" });
+          });
+        });
+      });
+
+      // Confetti Animation
+      function createConfetti() {
+        const confettiContainer = document.getElementById("confetti-container");
+
+        for (let i = 0; i < 100; i++) {
+          const confetti = document.createElement("div");
+          confetti.style.position = "absolute";
+          confetti.style.width = `${Math.random() * 10 + 5}px`;
+          confetti.style.height = `${Math.random() * 10 + 5}px`;
+          confetti.style.backgroundColor =
+            Math.random() > 0.5 ? "#F8C8DC" : "#C8E7F8";
+          confetti.style.left = `${Math.random() * 100}%`;
+          confetti.style.top = `-20px`;
+          confetti.style.opacity = Math.random();
+          confetti.style.borderRadius = Math.random() > 0.3 ? "50%" : "0";
+          confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+          const animationDuration = Math.random() * 3 + 2;
+          const animationDelay = Math.random() * 5;
+
+          confetti.style.animation = `fall ${animationDuration}s ${animationDelay}s linear infinite`;
+
+          confettiContainer.appendChild(confetti);
+        }
+
+        const style = document.createElement("style");
+        style.innerHTML = `
+        @keyframes fall {
+          0% { transform: translateY(-20px) rotate(0deg); }
+          100% { transform: translateY(100vh) rotate(360deg); }
+        }
+      `;
+        document.head.appendChild(style);
+      }
+
+      // Initialize confetti
+      window.addEventListener("load", createConfetti);
+
+      document.getElementById("enter-btn").addEventListener("click", () => {
+  const audio = document.getElementById("bg-music");
+  audio.currentTime = 7;
+  audio.play();
+  document.getElementById("intro-screen").style.display = "none";
+
+  // 👉 Mostrar el capibara recién ahora
+  document.getElementById("audio-controller").style.display = "block";
+});
+
+      // Control de música con capibara
+document.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("bg-music");
+  const capybara = document.getElementById("capybara-toggle");
+
+  audio.currentTime = 7;
+
+  // Intentar reproducir automáticamente
+  // audio
+  //   .play()
+  //   .then(() => {
+  //     capybara.src = "/Imagenes/Capibara-Pause.png";
+  //   })
+  //   .catch((err) => {
+  //     console.warn("Autoplay bloqueado. El usuario debe interactuar para iniciar la música.");
+  //   });
+
+  // Manejar clic manual por si autoplay fue bloqueado
+  capybara.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      capybara.src = "/Imagenes/Capibara-Play.png";
+    } else {
+      audio.pause();
+      capybara.src = "/Imagenes/Capibara-Play.png";
+    }
+  });
+
+  // Pre-cargar imagen de pausa
+  const preload = new Image();
+  preload.src = "/Imagenes/Capibara-Play.png";
+});
+
+// Carrusel automático
+document.addEventListener("DOMContentLoaded", () => {
+  const carousel = document.getElementById("carousel-images");
+  const slides = carousel.children.length;
+  let currentIndex = 0;
+
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % slides;
+    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }, 3000); // cambia cada 3 segundos
+});
+
+
+    </script>
+  </body>
+</html>
